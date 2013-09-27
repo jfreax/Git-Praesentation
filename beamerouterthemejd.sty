@@ -4,14 +4,16 @@
 \mode<presentation>
 
 % color definitions
-\definecolor{uipaleblue}{RGB}{96,123,139}
+\definecolor{uigray}{RGB}{217, 217, 217}
+\definecolor{uigreen}{RGB}{96, 147, 115}
+\definecolor{uigreen_dark}{RGB}{31, 39, 42}
 
 % footer styling
-\setbeamercolor{section in footer}{fg=white,bg=uipaleblue}
-\setbeamercolor{subsection in footer}{fg=white,bg=uipaleblue}
-\setbeamercolor{pagenumber in footer}{fg=white,bg=uipaleblue}
+\setbeamercolor{section in footer}{fg=uigreen_dark,bg=uigray}
+\setbeamercolor{subsection in footer}{fg=uigreen_dark,bg=uigray}
+\setbeamercolor{pagenumber in footer}{fg=uigreen_dark,bg=uigray}
 
-\defbeamertemplate*{footline}{bunsentheme}
+\defbeamertemplate*{footline}{jdtheme}
 {
   \leavevmode%
   \hbox{%
@@ -26,6 +28,7 @@
   \end{beamercolorbox}}%
   \vskip0pt%
 }
+
 
 \setbeamersize{text margin left=1em,text margin right=1em}
 
