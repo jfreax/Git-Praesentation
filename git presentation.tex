@@ -1,0 +1,84 @@
+\documentclass{beamer}
+
+\usepackage{graphicx} % graphics
+\usepackage{epsfig} % eps graphics
+\usepackage{hyperref} % urls
+\usepackage{booktabs, caption} % table styling
+
+% suppress navigation bar
+\beamertemplatenavigationsymbolsempty
+
+\mode<presentation>
+{
+  \usetheme{bunsen}
+  \setbeamercovered{transparent}
+  \setbeamertemplate{items}[circle]
+}
+
+% set fonts
+\usepackage{fontspec}
+\setsansfont{Fontin}
+\setmainfont{Fontin}
+\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+
+% color definitions
+\usepackage{color}
+\definecolor{uipoppy}{RGB}{225, 64, 5}
+\definecolor{uipaleblue}{RGB}{96,123,139}
+\definecolor{uiblack}{RGB}{0, 0, 0}
+\definecolor{uigreen}{RGB}{96, 147, 115}
+\definecolor{uigreen_dark}{RGB}{31, 39, 42}
+
+% caption styling
+\DeclareCaptionFont{uiblack}{\color{uiblack}}
+\DeclareCaptionFont{uipoppy}{\color{uipoppy}}
+\captionsetup{labelfont={uipoppy},textfont=uiblack}
+
+% see the macros.tex file for definitions
+\include{macros}
+
+% title slide definition
+\title{Git - Eine Einführung}
+\author{Jens Dieskau}
+
+
+\date{\today}
+
+\begin{document}
+
+%--------------------------------------------------------------------
+%                           Titelseite
+%--------------------------------------------------------------------
+
+\section{Titelseite}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\setbeamertemplate{footline}[default]
+
+\begin{frame}
+ \begin{center}
+   \textcolor{uigreen_dark}{
+     \textbf{
+       \Huge Git - Eine Einführung
+     }
+   }
+  \end{center}
+
+\end{frame}
+
+%-------------------------------------------------------------------
+%                          Section 1
+%-------------------------------------------------------------------
+%
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\setbeamertemplate{footline}[bunsentheme]
+\section{Preliminary findings}
+\begin{frame}
+ \begin{center}
+   \textcolor{uigreen}{
+     \Huge Hellooo
+   }
+  \end{center}
+\end{frame}
+
+\end{document}
