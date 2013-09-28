@@ -24,6 +24,7 @@
 
 \usepackage{setspace}
 \setstretch{3}
+\parindent 0pt
 
 % color definitions
 \usepackage{color}
@@ -39,6 +40,9 @@
 \DeclareCaptionFont{uiblack}{\color{uiblack}}
 \DeclareCaptionFont{uipoppy}{\color{uipoppy}}
 \captionsetup{labelfont={uipoppy},textfont=uiblack}
+
+% itemize style
+\setbeamertemplate{itemize item}{\Huge\raise2.55pt\hbox{\donotcoloroutermaths\cred{$\blacktriangleright$}}}
 
 % see the macros.tex file for definitions
 \include{macros}
@@ -68,11 +72,13 @@
 \end{frame}
 
 %-------------------------------------------------------------------
-%                          Datenstruktur
+%                              Datentypen
 %-------------------------------------------------------------------
 %
-\setbeamercolor{background canvas}{bg=uigreen_dark}
 \setbeamertemplate{footline}[jdtheme]
+
+
+\setbeamercolor{background canvas}{bg=uigreen_dark}
 \section{Datentypen}
 \begin{frame}
  \begin{center}
@@ -82,9 +88,94 @@
 
 \setbeamercolor{background canvas}{bg=uigreen}
 \begin{frame}
+  \begin{center}
+   \fontHeadIII{\cdark{
+     %\hspace{2.5em}blob \\
+     %\hspace{2.5em} tree \\
+     %\hspace{2.5em} tag \\
+     %\hspace{2.5em} commit \\
+     blob\\
+     tree\\
+     tag\\
+     commit\\
+   }}
+ \end{center}
+\end{frame}
+
+%\setbeamercolor{background canvas}{bg=uigreen}
+%\begin{frame}[t]
+%   %\fontHeadIII{\cdark{
+%   \begin{itemize}
+%     %\setlength{\itemindent}{5em}
+%     %\fontHeadIII{\cdark{
+%       \item blob
+%       \item tree
+%       \item commit
+%       \item tag
+%    % }}
+%   \end{itemize}
+%  %}}
+%\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}
  \begin{center}
-   \fontHeadII{\cdark{Datentypen}}
+   \fontHeadI{\cdark{blob}} \\
+   \fontHeadIV{\cgray{jede Datei im Repo}}
   \end{center}
 \end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}
+ \begin{center}
+   \fontHeadI{\cdark{tree}} \\
+   \fontHeadIV{\cgray{jede Verzeichnis}} \\
+   \fontSmall{\cgray{(tree-Objekte können andere tree-Objekte und blobs enthalten)}}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}
+ \begin{center}
+   \fontHeadI{\cdark{commit}} \\
+   \fontHeadIV{\cgray{Abbild eines tree}} \\
+   \fontSmall{\cgray{(zu einer bestimmten Zeit + Metainformationen)}}
+  \end{center}
+\end{frame}
+
+
+%-------------------------------------------------------------------
+%                              Repo?
+%-------------------------------------------------------------------
+%
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\section{Was ist ein Repo?}
+\begin{frame}
+ \begin{center}
+   \fontHeadII{\cred{Repo?}}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}
+   \fontHeadIII{\cdark{
+     \hspace{0.2em} Repo = \\
+     \hspace{1.3em} Repository = \\
+   }}
+   \vspace{3em}
+   \fontHeadIV{\cgray{
+     \hspace{1em} 'Aufbewahrungsort' \\
+   }}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}
+ \begin{center}
+   \fontHeadIV{\cdark{Graph aus Commits}} \\
+   
+  \end{center}
+\end{frame}
+
+
 
 \end{document}
