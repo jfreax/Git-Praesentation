@@ -1,9 +1,10 @@
-\documentclass{beamer}
+\documentclass[c]{beamer}
 
-\usepackage{graphicx} % graphics
-\usepackage{epsfig} % eps graphics
-\usepackage{hyperref} % urls
-\usepackage{booktabs, caption} % table styling
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{hyperref}
+\usepackage{booktabs, caption}
+\usepackage{anyfontsize}
 
 % suppress navigation bar
 \beamertemplatenavigationsymbolsempty
@@ -17,9 +18,12 @@
 
 % set fonts
 \usepackage{fontspec}
-\setsansfont{Fontin}
-\setmainfont{Fontin}
+\setsansfont{Changa One}
+%\setmainfont{Fontin}
 \setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+
+\usepackage{setspace}
+\setstretch{3}
 
 % color definitions
 \usepackage{color}
@@ -28,6 +32,8 @@
 \definecolor{uiblack}{RGB}{0, 0, 0}
 \definecolor{uigreen}{RGB}{96, 147, 115}
 \definecolor{uigreen_dark}{RGB}{31, 39, 42}
+\definecolor{uigray}{RGB}{217, 217, 217}
+\definecolor{uired}{RGB}{187, 114, 101}
 
 % caption styling
 \DeclareCaptionFont{uiblack}{\color{uiblack}}
@@ -40,7 +46,6 @@
 % title slide definition
 \title{Git - Eine Einführung}
 \author{Jens Dieskau}
-
 
 \date{\today}
 
@@ -57,27 +62,28 @@
 
 \begin{frame}
  \begin{center}
-   \textcolor{uigreen_dark}{
-     \textbf{
-       \Huge Git - Eine Einführung
-     }
-   }
+   \fontHeadI{\cgray{Git}} \\
+   \fontHeadIII{\cdark{Eine Einführung}} \\
   \end{center}
-
 \end{frame}
 
 %-------------------------------------------------------------------
-%                          Section 1
+%                          Datenstruktur
 %-------------------------------------------------------------------
 %
 \setbeamercolor{background canvas}{bg=uigreen_dark}
 \setbeamertemplate{footline}[jdtheme]
-\section{Preliminary findings}
+\section{Datentypen}
 \begin{frame}
  \begin{center}
-   \textcolor{uigreen}{
-     \Huge Hellooo
-   }
+   \fontHeadII{\cred{Datentypen}}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}
+ \begin{center}
+   \fontHeadII{\cdark{Datentypen}}
   \end{center}
 \end{frame}
 

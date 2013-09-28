@@ -13,3 +13,35 @@
 \usepackage{tikz}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+% Font sizes
+\newcommand{\fontHeadI}[1]{
+    \textbf{
+      {\fontsize{70}{60}\selectfont #1}
+    }
+}
+
+\newcommand{\fontHeadII}[1]{
+    \textbf{
+      {\fontsize{60}{50}\selectfont #1}
+    }
+}
+
+\newcommand{\fontHeadIII}[1]{
+    \textbf{
+      {\fontsize{40}{40}\selectfont #1}
+    }
+}
+
+% Font color
+\newcommand{\cdark}[1]{
+  \textcolor{uigreen_dark}{#1}
+}
+
+\newcommand{\cgray}[1]{
+  \textcolor{uigray}{#1}
+}
+
+\newcommand{\cred}[1]{
+  \textcolor{uired}{#1}
+}
