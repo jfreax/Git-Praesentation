@@ -181,11 +181,11 @@
     \column{1.5cm}
 
     \begin{tikzpicture}[%
-      <-,> = stealth',node distance=1.5cm, thick, main 
+      -,> = stealth',node distance=1.5cm, thick, main 
       node/.style = {circle,fill=uigray,draw,font=\sffamily\small\bfseries,
                      inner sep=0pt,minimum size=22pt}]
     
-      \node[main node] (0)              {0};
+      \node[main node] (0)              {0}[anchor=north];
       \node[main node] (1) [above of=0] {1};
       \node[main node] (2) [above of=1] {2};
       \node[main node] (3) [above of=2] {3};
@@ -194,6 +194,9 @@
         \foreach \y [count=\i] in {0,1,2} {
           (\y) edge node {} (\i)
         } ;
+        
+      \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=20pt},yshift=0pt]
+(0)[anchor=north] -- (3) node [black,midway,xshift=1.4cm] {$P_2$};
     \end{tikzpicture}
     
     \column{4.5cm}
