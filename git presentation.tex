@@ -54,6 +54,11 @@
 \date{\today}
 
 \begin{document}
+% For every picture that defines or uses external nodes, you'll have to
+% apply the 'remember picture' style. To avoid some typing, we'll apply
+% the style to all pictures.
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{na} = [baseline=-.5ex]
 
 %--------------------------------------------------------------------
 %                           Titelseite
@@ -171,62 +176,37 @@
 \end{frame}
 
 \setbeamercolor{background canvas}{bg=uigreen}
-\begin{frame}[t]
-  \begin{center}
-    \fontHeadIV{\cdark{Graph aus Commits}}
-  \end{center}
-   \vspace{-\baselineskip}
-  \begin{columns}[t]
+\begin{frame}[c]
+  \begin{columns}
     \column{1.5cm}
-    
-    %\begin{block}{}
-    
-  \begin{tikzpicture}[<-,>=stealth',node distance=1.5cm,
-    thick,main node/.style={circle,fill=uigray,draw,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=22pt}]
-    \node[main node] (0)              {0};
-    \node[main node] (1) [above of=0] {1};
-    \node[main node] (2) [above of=1] {2};
-    \node[main node] (3) [above of=2] {3};
 
-    \path[every node/.style={font=\sffamily\small}]
-      \foreach \y [count=\i] in {0,1,2} {
-        (\y) edge node {} (\i)
-      } ;
-  \end{tikzpicture}
-    %\end{block}
-    \column{4.5cm}
+    \begin{tikzpicture}[%
+      <-,> = stealth',node distance=1.5cm, thick, main 
+      node/.style = {circle,fill=uigray,draw,font=\sffamily\small\bfseries,
+                     inner sep=0pt,minimum size=22pt}]
     
-    %\begin{block}{}
-        \vspace{0.15cm}
-        \circled{1}$\textemdash$bastn\"{a}site \\
-        \circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    %\end{block}
+      \node[main node] (0)              {0};
+      \node[main node] (1) [above of=0] {1};
+      \node[main node] (2) [above of=1] {2};
+      \node[main node] (3) [above of=2] {3};
+
+      \path[every node/.style={font=\sffamily\small}]
+        \foreach \y [count=\i] in {0,1,2} {
+          (\y) edge node {} (\i)
+        } ;
+    \end{tikzpicture}
+    
+    \column{4.5cm}
+      \only<2->{
+        \tikz[na] \coordinate (commit); \fontHeadIV{\cgray{Commit}}
+      }
+
   \end{columns}
 
-
+  % Overlay (arrows)
+  \begin{tikzpicture}[overlay]
+    \path[->,uigray,dashed,thick]<2-> ($(commit)+(0,0.5em)$) edge [bend left=20] (3);
+  \end{tikzpicture}
 
 \end{frame}
 
