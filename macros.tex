@@ -11,6 +11,15 @@
 % for drawing circles around numbers
 % ex. \circled{1} Add some text here.
 \usepackage{tikz}
+\usepackage{ifthen}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\usetikzlibrary{decorations,arrows}
+\usetikzlibrary{decorations.pathmorphing}
+\usepgflibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathreplacing}
+
+
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 

@@ -129,7 +129,7 @@
 \begin{frame}
  \begin{center}
    \fontHeadI{\cdark{tree}} \\
-   \fontHeadIV{\cgray{jede Verzeichnis}} \\
+   \fontHeadIV{\cgray{jedes Verzeichnis}} \\
    \fontSmall{\cgray{(tree-Objekte können andere tree-Objekte und blobs enthalten)}}
   \end{center}
 \end{frame}
@@ -151,29 +151,81 @@
 \setbeamercolor{background canvas}{bg=uigreen_dark}
 \section{Was ist ein Repo?}
 \begin{frame}
- \begin{center}
-   \fontHeadII{\cred{Repo?}}
+  \begin{center}
+    \fontHeadII{\cred{Repo?}}
   \end{center}
 \end{frame}
 
 \setbeamercolor{background canvas}{bg=uigreen}
 \begin{frame}
-   \fontHeadIII{\cdark{
-     \hspace{0.2em} Repo = \\
-     \hspace{1.3em} Repository = \\
-   }}
-   \vspace{3em}
-   \fontHeadIV{\cgray{
-     \hspace{1em} 'Aufbewahrungsort' \\
-   }}
+  \fontHeadIII{\cdark{
+    \hspace{0.2em} Repo = \\
+    \hspace{1.3em} Repository = \\
+  }}
+  \vspace{3em}
+  \fontHeadIV{\cgray{
+    \hspace{1em} 'Aufbewahrungsort' \\
+  }}
 \end{frame}
 
 \setbeamercolor{background canvas}{bg=uigreen}
-\begin{frame}
- \begin{center}
-   \fontHeadIV{\cdark{Graph aus Commits}} \\
-   
+\begin{frame}[t]
+  \begin{center}
+    \fontHeadIV{\cdark{Graph aus Commits}}
   \end{center}
+   \vspace{-\baselineskip}
+  \begin{columns}[t]
+    \column{1.5cm}
+    
+    %\begin{block}{}
+    
+  \begin{tikzpicture}[<-,>=stealth',node distance=1.5cm,
+    thick,main node/.style={circle,fill=uigray,draw,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=22pt}]
+    \node[main node] (0)              {0};
+    \node[main node] (1) [above of=0] {1};
+    \node[main node] (2) [above of=1] {2};
+    \node[main node] (3) [above of=2] {3};
+
+    \path[every node/.style={font=\sffamily\small}]
+      \foreach \y [count=\i] in {0,1,2} {
+        (\y) edge node {} (\i)
+      } ;
+  \end{tikzpicture}
+    %\end{block}
+    \column{4.5cm}
+    
+    %\begin{block}{}
+        \vspace{0.15cm}
+        \circled{1}$\textemdash$bastn\"{a}site \\
+        \circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\\circled{2}$\textemdash${monazite} \\
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    %\end{block}
+  \end{columns}
+
+
+
 \end{frame}
 
 
