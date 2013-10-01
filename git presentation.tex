@@ -231,5 +231,38 @@
 
 \end{frame}
 
+%-------------------------------------------------------------------
+%                              Branches
+%-------------------------------------------------------------------
+%
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\section{Branch}
+\begin{frame}
+  \begin{center}
+    \fontHeadII{\cred{Branches}}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}[c]
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.6cm, very thick]
+    
+      \node[commit] (0)              {0}[anchor=north];
+      \node[commit] (1) [above of=0] {1};
+      \node[commit] (2) [above of=1] {2};
+      \node[commit] (3) [above of=2] {3};
+      \node[branch]  (master) [above of=3]  {master};
+
+      \path[<-, every node/.style={font=\sffamily\small}]
+        \foreach \y [count=\i] in {0,1,2} {
+          (\y) edge node {} (\i)
+        } ;
+        
+      \path[-,uigreen_dark,thick,dashed]
+        (3) edge node [uigray,xshift=-0.3cm,font=\Large]{} (master);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
 
 \end{document}
