@@ -50,6 +50,8 @@
 % tikz styles
 \tikzstyle{commit} = [circle,fill=uigray,draw,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=24pt]
 \tikzstyle{branch} = [draw,fill=uipaleblue!60,minimum size=2em]
+\tikzstyle{arrow_branch} = [draw,-,uigreen_dark,thick,dashed]
+\tikzstyle{arrow_commit} = [draw,<-,uigreen_dark,very thick]
 
 % title slide definition
 \title{Git - Eine Einführung}
@@ -247,7 +249,6 @@
 \begin{frame}[c]
   \begin{center}
     \begin{tikzpicture}[-,> = stealth',node distance=1.6cm, very thick]
-    
       \node[commit] (0)              {0}[anchor=north];
       \node[commit] (1) [above of=0] {1};
       \node[commit] (2) [above of=1] {2};
@@ -261,8 +262,7 @@
         } ;
         
       % Arrow branch to last commit
-      \path[-,uigreen_dark,thick,dashed]
-        (3) edge node [uigray,xshift=-0.3cm,font=\Large]{} (master);
+      \path[arrow_branch] (3) edge node [uigray,xshift=-0.3cm,font=\Large]{} (master);
         
       % "Referenz" string and arrow
       \visible<2->{
@@ -276,6 +276,47 @@
         \node[style={font=\sffamily\Large}] (branch_name) at (3,3) {Name};
         \path[<-,uigreen_dark,dotted,thick,shorten <= 6.0pt]
           (master.center) edge [bend right=10] (branch_name.north);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}[c]
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.4cm, very thick]
+      \node[commit] (0)              {0}[anchor=north];
+      \node[commit] (1) [above of=0] {1};
+      \node[commit] (2) [above of=1] {2};
+      \node[commit] (5) [above of=2] {5};
+      \node[commit] (3) [right of=5,node distance=2.5cm] {3};
+      \node[commit] (4) [right of=2,node distance=5cm] {4};
+      \node[branch] (bugfix) [above of=4] {bugfix};
+      \node[branch]  (featureX) [above of=3]  {featureX};
+      
+      \visible<1>{
+        \node[branch]  (master) [above of=5]  {master};
+      }
+      
+      % Commit arrows
+      \path[arrow_commit] (0) -- (1);
+      \path[arrow_commit] (1) -- (2);
+      \path[arrow_commit] (2) -- (5);
+      \path[arrow_commit] (2) -- (3);
+      \path[arrow_commit] (1) -- (4);
+      
+      \path[arrow_branch]<1> (5) -- (master);
+      \path[arrow_branch] (3) -- (featureX);
+      \path[arrow_branch] (4) -- (bugfix);
+      
+      % More than one parent
+      \visible<2->{
+        \node[commit] (6) [above of=5] {6};
+        \node[branch]  (master) [above of=6]  {master};
+
+        \path[arrow_commit] (5) -- (6);      
+        \path[arrow_commit] (3) -- (6);
+        \path[arrow_branch] (6) -- (master);
       }
     \end{tikzpicture}
   \end{center}
