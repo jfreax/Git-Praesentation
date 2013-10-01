@@ -47,6 +47,10 @@
 % see the macros.tex file for definitions
 \include{macros}
 
+% tikz styles
+\tikzstyle{commit} = [circle,fill=uigray,draw,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=24pt]
+\tikzstyle{branch} = [draw,fill=uipaleblue!60,minimum size=2em]
+
 % title slide definition
 \title{Git - Eine Einführung}
 \author{Jens Dieskau}
@@ -180,16 +184,13 @@
   \begin{columns}
     \column{1.0cm}
 
-    \vspace{2.2em}
-    \begin{tikzpicture}[%
-      -,> = stealth',node distance=2.0cm, very thick, main 
-      node/.style = {circle,fill=uigray,draw,font=\sffamily\small\bfseries,
-                     inner sep=0pt,minimum size=24pt}]
+    \vspace{2.0em}
+    \begin{tikzpicture}[-,> = stealth',node distance=2.0cm, very thick]
     
-      \node[main node] (0)              {0}[anchor=north];
-      \node[main node] (1) [above of=0] {1};
-      \node[main node] (2) [above of=1] {2};
-      \node[main node] (3) [above of=2] {3};
+      \node[commit] (0)              {0}[anchor=north];
+      \node[commit] (1) [above of=0] {1};
+      \node[commit] (2) [above of=1] {2};
+      \node[commit] (3) [above of=2] {3};
 
       \path[<-, every node/.style={font=\sffamily\small}]
         \foreach \y [count=\i] in {0,1,2} {
@@ -206,7 +207,6 @@
            \ \tikz[na] \coordinate (sha); \cgray{SHA1} \\
         }
       }
-
   \end{columns}
     
   % Brace with "Repository"
@@ -230,7 +230,6 @@
   \end{tikzpicture}
 
 \end{frame}
-
 
 
 \end{document}
