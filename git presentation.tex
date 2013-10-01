@@ -154,7 +154,7 @@
 %-------------------------------------------------------------------
 %
 \setbeamercolor{background canvas}{bg=uigreen_dark}
-\section{Was ist ein Repo?}
+\section{Repository}
 \begin{frame}
   \begin{center}
     \fontHeadII{\cred{Repo?}}
@@ -198,17 +198,20 @@
     \end{tikzpicture}
     
     \column{4.5cm}
-      \visible<2->{
-        \fontHeadIV{
-          \tikz[na] \coordinate (commit); \cgray{Commit}
+      \fontHeadIV{
+        \visible<2-4>{
+          \tikz[na] \coordinate (commit);\cgray{Commit} \\
+        }
+        \visible<3-4>{
+           \ \tikz[na] \coordinate (sha); \cgray{SHA1} \\
         }
       }
 
   \end{columns}
     
   % Brace with "Repository"
-  \only<1>{
-  \begin{tikzpicture}[overlay]<1>
+  \only<5>{
+  \begin{tikzpicture}[overlay]
           \draw[decorate,decoration={brace,amplitude=12pt,mirror,raise=30pt},yshift=0pt,color=uigray,ultra thick]
                (0.south) -- (3.north) node [uigray,midway,xshift=4.5cm] {
                  \fontHeadIV{$Repository$}
@@ -216,10 +219,15 @@
   \end{tikzpicture}
   }
   
-  % Overlay (arrows)
+  % Arrows overlay
   \begin{tikzpicture}[overlay]
-    \path[->,uigray,dashed,thick]<2-> (commit) edge [bend left=20] (3);
-   \end{tikzpicture}
+    \path[<-,> = stealth',uigreen_dark,thick,transform canvas={xshift=-20pt}]<4->
+      (3.west) edge node [uigray,xshift=-0.3cm,font=\Large]{t} (0.west);
+    \path[<-,uigreen_dark,dashed,thick]<2-4>
+      (2) edge node {} (commit);
+    \path[<-,uigreen_dark,dashed,thick,shorten <= 3.8pt]<3-4>
+      (1.center) edge [bend left=10] (sha);
+  \end{tikzpicture}
 
 \end{frame}
 
