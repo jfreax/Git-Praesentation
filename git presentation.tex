@@ -178,12 +178,13 @@
 \setbeamercolor{background canvas}{bg=uigreen}
 \begin{frame}[c]
   \begin{columns}
-    \column{1.5cm}
+    \column{1.0cm}
 
+    \vspace{2.2em}
     \begin{tikzpicture}[%
-      -,> = stealth',node distance=1.5cm, thick, main 
+      -,> = stealth',node distance=2.0cm, very thick, main 
       node/.style = {circle,fill=uigray,draw,font=\sffamily\small\bfseries,
-                     inner sep=0pt,minimum size=22pt}]
+                     inner sep=0pt,minimum size=24pt}]
     
       \node[main node] (0)              {0}[anchor=north];
       \node[main node] (1) [above of=0] {1};
@@ -194,24 +195,31 @@
         \foreach \y [count=\i] in {0,1,2} {
           (\y) edge node {} (\i)
         } ;
-        
-      \draw [decorate,decoration={brace,amplitude=12pt,mirror,raise=30pt},yshift=0pt,color=uigray,ultra thick]
-            (0.south) -- (3.north) node [uigray,midway,xshift=4.5cm] {
-              \fontHeadIV{$Repository$}
-            };
     \end{tikzpicture}
     
     \column{4.5cm}
-      \only<2->{
-        \tikz[na] \coordinate (commit); \fontHeadIV{\cgray{Commit}}
+      \visible<2->{
+        \fontHeadIV{
+          \tikz[na] \coordinate (commit); \cgray{Commit}
+        }
       }
 
   \end{columns}
-
+    
+  % Brace with "Repository"
+  \only<1>{
+  \begin{tikzpicture}[overlay]<1>
+          \draw[decorate,decoration={brace,amplitude=12pt,mirror,raise=30pt},yshift=0pt,color=uigray,ultra thick]
+               (0.south) -- (3.north) node [uigray,midway,xshift=4.5cm] {
+                 \fontHeadIV{$Repository$}
+               };
+  \end{tikzpicture}
+  }
+  
   % Overlay (arrows)
   \begin{tikzpicture}[overlay]
-    \path[->,uigray,dashed,thick]<2-> ($(commit)+(0,0.5em)$) edge [bend left=20] (3);
-  \end{tikzpicture}
+    \path[->,uigray,dashed,thick]<2-> (commit) edge [bend left=20] (3);
+   \end{tikzpicture}
 
 \end{frame}
 
