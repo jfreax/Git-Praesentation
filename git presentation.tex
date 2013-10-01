@@ -254,13 +254,29 @@
       \node[commit] (3) [above of=2] {3};
       \node[branch]  (master) [above of=3]  {master};
 
+      % Commit arrows
       \path[<-, every node/.style={font=\sffamily\small}]
         \foreach \y [count=\i] in {0,1,2} {
           (\y) edge node {} (\i)
         } ;
         
+      % Arrow branch to last commit
       \path[-,uigreen_dark,thick,dashed]
         (3) edge node [uigray,xshift=-0.3cm,font=\Large]{} (master);
+        
+      % "Referenz" string and arrow
+      \visible<2->{
+        \node[style={font=\sffamily\Large}] (branch_ref) at (-4,5) {Referenz};
+        \path[<-,uigreen_dark,dotted,thick,shorten <= 8.0pt]
+          (master.south) edge [bend left=10] (branch_ref.east);
+      }
+        
+      % "Name" string and arrow
+      \visible<3->{
+        \node[style={font=\sffamily\Large}] (branch_name) at (3,3) {Name};
+        \path[<-,uigreen_dark,dotted,thick,shorten <= 6.0pt]
+          (master.center) edge [bend right=10] (branch_name.north);
+      }
     \end{tikzpicture}
   \end{center}
 \end{frame}
