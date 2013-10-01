@@ -190,13 +190,15 @@
       \node[main node] (2) [above of=1] {2};
       \node[main node] (3) [above of=2] {3};
 
-      \path[every node/.style={font=\sffamily\small}]
+      \path[<-, every node/.style={font=\sffamily\small}]
         \foreach \y [count=\i] in {0,1,2} {
           (\y) edge node {} (\i)
         } ;
         
-      \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=20pt},yshift=0pt]
-(0)[anchor=north] -- (3) node [black,midway,xshift=1.4cm] {$P_2$};
+      \draw [decorate,decoration={brace,amplitude=12pt,mirror,raise=30pt},yshift=0pt,color=uigray,ultra thick]
+            (0.south) -- (3.north) node [uigray,midway,xshift=4.5cm] {
+              \fontHeadIV{$Repository$}
+            };
     \end{tikzpicture}
     
     \column{4.5cm}
