@@ -684,7 +684,6 @@
   \end{center}
 \end{frame}
 
-
 %-------------------------------------------------------------------
 %                                 Merge
 %-------------------------------------------------------------------
@@ -694,6 +693,86 @@
 \begin{frame}
   \begin{center}
     \fontHeadII{\cred{Merge}} \\
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}[c]
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
+      \node[commit, opacity=0.5] (etc) at (0, 2)  {...};
+      \node[commit] (6) [right of=etc] {6};
+      
+      % Commit arrows
+      \path[arrow_commit] (etc) -- (6);
+      
+      % Remote branch
+      \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
+      \path[arrow_branch] (6) -- (master_remote);
+
+      \visible<1>{
+      % Master
+        \node[branch]  (master) [below right of=6]  {master};
+        \path[arrow_branch] (6) -- (master);
+
+        % Head
+        \node[head]  (head) [below of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
+      }
+      
+      % Add two more local commits
+      \visible<2->{
+        \node[commit] (9) [right of=6] {9};
+        \node[commit] (10) [right of=9] {10};
+        
+        % Commit arrows
+        \path[arrow_commit] (6) -- (9);
+        \path[arrow_commit] (9) -- (10);
+      }
+      
+      % New master position after two commits
+      \visible<2>{
+        \node[branch]  (master) [below right of=10]  {master};
+        \path[arrow_branch] (10) -- (master);
+        
+        % Head
+        \node[head]  (head) [below of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
+        
+        % Git commit command
+        \node[headline] (text_commit) at (1,6) {\texttt{git commit}};
+      }
+      
+      % After merge
+      \visible<3->{
+        \node[commit] (11) [right of=10] {11};
+        \path[arrow_commit] (10) -- (11);
+        \path[arrow_commit] (8) -- (11);
+      }
+      
+      % New master position after merge
+      \visible<3>{
+        \node[branch]  (master) [below right of=11]  {master};
+        \path[arrow_branch] (11) -- (master);
+        
+        % Head
+        \node[head]  (head) [below of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
+        
+        % Git merge command
+        \node[headline] (text_merge) at (1,6) {\texttt{git merge}};
+      }
+
+      % Commits from franz
+      \node[commit3] (7) [above of=9] {7};
+      \node[commit3] (8) [right of=7] {8};
+      \path[arrow_commit] (6) -- (7);
+      \path[arrow_commit] (7) -- (8);
+
+      \node[branch_remote]  (master_remote2) [above right of=8]  {franz/master};
+      \path[arrow_branch] (8) -- (master_remote2);
+
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
