@@ -34,7 +34,12 @@
 \definecolor{uigreen}{RGB}{96, 147, 115}
 \definecolor{uigreen_dark}{RGB}{31, 39, 42}
 \definecolor{uigray}{RGB}{217, 217, 217}
+\definecolor{uigray2}{RGB}{117, 117, 117}
 \definecolor{uired}{RGB}{187, 114, 101}
+
+\definecolor{blue1}{RGB}{41, 128, 185}
+\definecolor{blue2}{RGB}{52, 152, 219}
+\definecolor{blue3}{RGB}{44, 62, 80}
 
 % caption styling
 \DeclareCaptionFont{uiblack}{\color{uiblack}}
@@ -48,10 +53,10 @@
 \include{macros}
 
 % tikz styles
-\tikzstyle{commit} = [circle,fill=uigray,draw,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=24pt]
+\tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=24pt]
 \tikzstyle{branch} = [draw,fill=uipaleblue!60,minimum size=2em]
-\tikzstyle{arrow_branch} = [draw,-,uigreen_dark,thick,dashed]
-\tikzstyle{arrow_commit} = [draw,<-,uigreen_dark,very thick]
+\tikzstyle{arrow_commit} = [draw=blue3, fill=blue3,<-,very thick]
+\tikzstyle{arrow_branch} = [draw=blue3, fill=blue3,-,thick,dashed]
 
 % title slide definition
 \title{Git - Eine Einführung}
@@ -194,7 +199,7 @@
       \node[commit] (2) [above of=1] {2};
       \node[commit] (3) [above of=2] {3};
 
-      \path[<-, every node/.style={font=\sffamily\small}]
+      \path[arrow_commit]
         \foreach \y [count=\i] in {0,1,2} {
           (\y) edge node {} (\i)
         } ;
@@ -223,11 +228,11 @@
   
   % Arrows overlay
   \begin{tikzpicture}[overlay]
-    \path[<-,> = stealth',uigreen_dark,thick,transform canvas={xshift=-20pt}]<4->
+    \path[<-,> = stealth',uigray,thick,transform canvas={xshift=-20pt}]<4->
       (3.west) edge node [uigray,xshift=-0.3cm,font=\Large]{t} (0.west);
-    \path[<-,uigreen_dark,dashed,thick]<2-4>
+    \path[<-,uigray,dashed,thick]<2-4>
       (2) edge node {} (commit);
-    \path[<-,uigreen_dark,dashed,thick,shorten <= 3.8pt]<3-4>
+    \path[<-,uigray,dashed,thick,shorten <= 3.8pt]<3-4>
       (1.center) edge [bend left=10] (sha);
   \end{tikzpicture}
 
@@ -256,7 +261,7 @@
       \node[branch]  (master) [above of=3]  {master};
 
       % Commit arrows
-      \path[<-, every node/.style={font=\sffamily\small}]
+      \path[arrow_commit]
         \foreach \y [count=\i] in {0,1,2} {
           (\y) edge node {} (\i)
         } ;
@@ -267,14 +272,14 @@
       % "Referenz" string and arrow
       \visible<2->{
         \node[style={font=\sffamily\Large}] (branch_ref) at (-4,5) {Referenz};
-        \path[<-,uigreen_dark,dotted,thick,shorten <= 8.0pt]
+        \path[<-,uigray,dotted,thick,shorten <= 8.0pt]
           (master.south) edge [bend left=10] (branch_ref.east);
       }
         
       % "Name" string and arrow
       \visible<3->{
         \node[style={font=\sffamily\Large}] (branch_name) at (3,3) {Name};
-        \path[<-,uigreen_dark,dotted,thick,shorten <= 6.0pt]
+        \path[<-,uigray,dotted,thick,shorten <= 6.0pt]
           (master.center) edge [bend right=10] (branch_name.north);
       }
     \end{tikzpicture}
