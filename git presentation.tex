@@ -307,7 +307,10 @@
       \node[commit2] (3) [above of=5] {3};
       \node[commit3] (4) [below of=2] {4};
       \node[branch] (featureX) [below of=4] {featureX};
-      \node[branch]  (bugfix) [above of=3]  {bugfix};
+      
+      \visible<1-2>{
+        \node[branch]  (bugfix) [above of=3]  {bugfix};
+      }
       
       \visible<1>{
         \node[branch]  (master) [below of=5]  {master};
@@ -321,7 +324,7 @@
       \path[arrow_commit] (1) -- (4);
       
       \path[arrow_branch]<1> (5) -- (master);
-      \path[arrow_branch] (3) -- (bugfix);
+      \path[arrow_branch]<1-2> (3) -- (bugfix);
       \path[arrow_branch] (4) -- (featureX);
       
       % More than one parent
@@ -332,6 +335,12 @@
         \path[arrow_commit] (5) -- (6);      
         \path[arrow_commit] (3) -- (6);
         \path[arrow_branch] (6) -- (master);
+      }
+      
+      % Delete bugfix-Branch
+      \visible<3->{
+        \node[branch, opacity=0.2]  (bugfix) [above of=3]  {bugfix};
+        \path[arrow_branch, opacity=0.2] (3) -- (bugfix);
       }
     \end{tikzpicture}
   \end{center}
