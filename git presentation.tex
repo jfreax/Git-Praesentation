@@ -40,6 +40,11 @@
 \definecolor{blue1}{RGB}{41, 128, 185}
 \definecolor{blue2}{RGB}{52, 152, 219}
 \definecolor{blue3}{RGB}{44, 62, 80}
+\definecolor{turquoise}{RGB}{22, 160, 133}
+\definecolor{green1}{RGB}{39, 174, 96}
+
+\definecolor{yellow1}{RGB}{241, 196, 15}
+\definecolor{orange1}{RGB}{243, 156, 18}
 
 % caption styling
 \DeclareCaptionFont{uiblack}{\color{uiblack}}
@@ -53,7 +58,10 @@
 \include{macros}
 
 % tikz styles
-\tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=24pt]
+\tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=28pt]
+\tikzstyle{commit2} = [commit,fill=uired!60,draw=uired]
+\tikzstyle{commit3} = [commit,fill=green1,draw=turquoise]
+\tikzstyle{commit4} = [commit,fill=yellow1,draw=orange1]
 \tikzstyle{branch} = [draw,fill=uipaleblue!60,minimum size=2em]
 \tikzstyle{arrow_commit} = [draw=blue3, fill=blue3,<-,very thick]
 \tikzstyle{arrow_branch} = [draw=blue3, fill=blue3,-,thick,dashed]
@@ -243,7 +251,7 @@
 %-------------------------------------------------------------------
 %
 \setbeamercolor{background canvas}{bg=uigreen_dark}
-\section{Branch}
+\section{Branches}
 \begin{frame}
   \begin{center}
     \fontHeadII{\cred{Branches}}
@@ -253,11 +261,11 @@
 \setbeamercolor{background canvas}{bg=uigreen}
 \begin{frame}[c]
   \begin{center}
-    \begin{tikzpicture}[-,> = stealth',node distance=1.6cm, very thick]
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
       \node[commit] (0)              {0}[anchor=north];
-      \node[commit] (1) [above of=0] {1};
-      \node[commit] (2) [above of=1] {2};
-      \node[commit] (3) [above of=2] {3};
+      \node[commit] (1) [right of=0] {1};
+      \node[commit] (2) [right of=1] {2};
+      \node[commit] (3) [right of=2] {3};
       \node[branch]  (master) [above of=3]  {master};
 
       % Commit arrows
@@ -268,20 +276,22 @@
         
       % Arrow branch to last commit
       \path[arrow_branch] (3) edge node [uigray,xshift=-0.3cm,font=\Large]{} (master);
+      
+              
+      % "Name" string and arrow
+      \visible<2->{
+        \node[style={font=\sffamily\Large}] (branch_name) at (3,4) {Name};
+        \path[<-,uigray,dotted,thick,shorten <= 6.0pt]
+          (master.center) edge [bend right=10] (branch_name.south);
+      }
         
       % "Referenz" string and arrow
-      \visible<2->{
-        \node[style={font=\sffamily\Large}] (branch_ref) at (-4,5) {Referenz};
-        \path[<-,uigray,dotted,thick,shorten <= 8.0pt]
-          (master.south) edge [bend left=10] (branch_ref.east);
-      }
-        
-      % "Name" string and arrow
       \visible<3->{
-        \node[style={font=\sffamily\Large}] (branch_name) at (3,3) {Name};
-        \path[<-,uigray,dotted,thick,shorten <= 6.0pt]
-          (master.center) edge [bend right=10] (branch_name.north);
+        \node[style={font=\sffamily\Large}] (branch_ref) at (8,0) {Referenz};
+        \path[<-,uigray,dotted,thick,shorten <= 8.0pt]
+          (master.south) edge [bend left=10] (branch_ref.west);
       }
+
     \end{tikzpicture}
   \end{center}
 \end{frame}
@@ -289,18 +299,18 @@
 \setbeamercolor{background canvas}{bg=uigreen}
 \begin{frame}[c]
   \begin{center}
-    \begin{tikzpicture}[-,> = stealth',node distance=1.4cm, very thick]
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
       \node[commit] (0)              {0}[anchor=north];
-      \node[commit] (1) [above of=0] {1};
-      \node[commit] (2) [above of=1] {2};
-      \node[commit] (5) [above of=2] {5};
-      \node[commit] (3) [right of=5,node distance=2.5cm] {3};
-      \node[commit] (4) [right of=2,node distance=5cm] {4};
-      \node[branch] (bugfix) [above of=4] {bugfix};
-      \node[branch]  (featureX) [above of=3]  {featureX};
+      \node[commit] (1) [right of=0] {1};
+      \node[commit] (2) [right of=1] {2};
+      \node[commit] (5) [right of=2] {5};
+      \node[commit2] (3) [above of=5] {3};
+      \node[commit3] (4) [below of=2] {4};
+      \node[branch] (featureX) [below of=4] {featureX};
+      \node[branch]  (bugfix) [above of=3]  {bugfix};
       
       \visible<1>{
-        \node[branch]  (master) [above of=5]  {master};
+        \node[branch]  (master) [below of=5]  {master};
       }
       
       % Commit arrows
@@ -311,13 +321,13 @@
       \path[arrow_commit] (1) -- (4);
       
       \path[arrow_branch]<1> (5) -- (master);
-      \path[arrow_branch] (3) -- (featureX);
-      \path[arrow_branch] (4) -- (bugfix);
+      \path[arrow_branch] (3) -- (bugfix);
+      \path[arrow_branch] (4) -- (featureX);
       
       % More than one parent
       \visible<2->{
-        \node[commit] (6) [above of=5] {6};
-        \node[branch]  (master) [above of=6]  {master};
+        \node[commit] (6) [right of=5] {6};
+        \node[branch]  (master) [below of=6]  {master};
 
         \path[arrow_commit] (5) -- (6);      
         \path[arrow_commit] (3) -- (6);
@@ -326,5 +336,6 @@
     \end{tikzpicture}
   \end{center}
 \end{frame}
+
 
 \end{document}
