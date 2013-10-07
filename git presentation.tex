@@ -65,6 +65,7 @@
 \tikzstyle{commit3} = [commit, fill=green1, draw=turquoise]
 \tikzstyle{commit4} = [commit, fill=yellow1, draw=orange1]
 \tikzstyle{branch} = [draw, rounded corners=5pt, fill=uipaleblue!60, minimum size=2em]
+\tikzstyle{branch_remote} = [branch, fill=uipaleblue!80]
 \tikzstyle{head} = [branch, rounded corners=0pt, fill=yellow1]
 \tikzstyle{tag} = [head, rounded corners=10pt]
 
@@ -530,6 +531,60 @@
       \fontHeadIV{\cdark{git}} &  \fontNormal{\cgray{git://host.xz[:port]/path/to/repo.git}} \\ 
       \fontHeadIV{\cdark{file}} & \fontNormal{\cgray{file:///full/path/to/reponame}} \\ 
     \end{tabular} 
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\section{Branches}
+\begin{frame}
+  \begin{center}
+    \fontHeadII{\cred{Remote}} \\
+    \vspace{2em}
+    \fontHeadII{\cred{Branches}}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}[c]
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
+      \node[commit] (0)              {0}[anchor=north];
+      \node[commit] (1) [right of=0] {1};
+      \node[commit] (2) [right of=1] {2};
+      \node[commit] (5) [right of=2] {5};
+      \node[commit2] (3) [above of=5] {3};
+      \node[commit3] (4) [below of=2] {4};
+      \node[commit] (6) [right of=5] {6};
+      \node[branch]  (master) [below right of=6]  {master};
+      \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
+      \node[branch_remote] (featureX_remote) [below of=4] {origin/featureX};
+      \node[branch] (bugfix) [above right of=3]  {bugfix};
+      \node[branch_remote] (bugfix_remote) [above left of=3]  {origin/bugfix};
+      
+      % Head
+      \node[head]  (head) [below of=master]  {HEAD};
+      \path[arrow_head] (head) -- (master);
+      
+      % Commit arrows
+      \path[arrow_commit] (0) -- (1);
+      \path[arrow_commit] (1) -- (2);
+      \path[arrow_commit] (2) -- (5);
+      \path[arrow_commit] (2) -- (3);
+      \path[arrow_commit] (1) -- (4);
+      \path[arrow_commit] (5) -- (6);
+
+      % Branch arrows
+      \path[arrow_branch] (6) -- (master);
+      \path[arrow_branch] (6) -- (master_remote);
+      \path[arrow_branch] (3) -- (bugfix);
+      \path[arrow_branch] (3) -- (bugfix_remote);
+      \path[arrow_branch] (4) -- (featureX_remote);
+      
+      % Tag
+      \node[tag] (tag1) [above of=1] {v1.0};
+      \path[arrow_head] (tag1) -- (1);
+
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
