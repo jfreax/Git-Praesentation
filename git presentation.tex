@@ -289,7 +289,7 @@
               
       % "Name" string and arrow
       \visible<2->{
-        \node[style={font=\sffamily\Huge}] (branch_name) at (3,4) {Name};
+        \node[style={font=\sffamily\Huge}] (branch_name) at (3,3) {Name};
         \path[<-,uigray,dotted,thick,shorten <= 6.0pt]
           (master.center) edge [bend right=10] (branch_name.south);
       }
@@ -347,13 +347,15 @@
       }
       
       \visible<2>{
-        \node[headline] (text_merge) at (0,3) {Merge};
+        \node[headline] (text_merge) at (0,3) {\texttt{git merge}};
       }
       
       % Delete bugfix-Branch
       \visible<3->{
         \node[branch, opacity=0.2]  (bugfix) [above of=3]  {bugfix};
         \path[arrow_branch, opacity=0.2] (3) -- (bugfix);
+        
+        \node[headline] (text_delete) at (0,3) {\texttt{git branch -d}};
       }
     \end{tikzpicture}
   \end{center}
@@ -517,7 +519,6 @@
 %
 \setbeamercolor{background canvas}{bg=uigreen}
 \section{Remote}
-
 \begin{frame}
  \begin{center}
    \fontHeadI{\cdark{Remote}} \\
@@ -540,7 +541,6 @@
 \end{frame}
 
 \setbeamercolor{background canvas}{bg=uigreen_dark}
-\section{Branches}
 \begin{frame}
   \begin{center}
     \fontHeadII{\cred{Remote}} \\
@@ -557,8 +557,8 @@
       \node[commit] (1) [right of=0] {1};
       \node[commit] (2) [right of=1] {2};
       \node[commit] (5) [right of=2] {5};
-      \node[commit2] (3) [above of=5] {3};
-      \node[commit3] (4) [below of=2] {4};
+      \node[commit] (3) [above of=5] {3};
+      \node[commit] (4) [below of=2] {4};
       \node[commit] (6) [right of=5] {6};
       \node[branch]  (master) [below right of=6]  {master};
       \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
@@ -593,6 +593,94 @@
       \visible<2->{
         \node[branch_remote]  (master_remote2) [above right of=6]  {franz/master};
         \path[arrow_branch] (6) -- (master_remote2);
+      }
+
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+%-------------------------------------------------------------------
+%                                Fetch
+%-------------------------------------------------------------------
+%
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\section{Fetch}
+\begin{frame}
+  \begin{center}
+    \fontHeadII{\cred{Fetch}} \\
+  \end{center}
+\end{frame}
+
+
+% Hier besonders darauf hinweisen, dass sich der sha-Wert nach dem mergen nicht aengert!
+% Blobs/commits ist es egal wo sie herkommen.
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}[c]
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
+      \node[commit, opacity=0.5] (etc) at (0, 2)  {...};
+      \node[commit] (5) [right of=etc] {5};
+      \node[commit] (6) [right of=5] {6};
+      
+      % Commit arrows
+      \path[arrow_commit] (etc) -- (5);
+      \path[arrow_commit] (5) -- (6);
+
+      \visible<1>{
+        % Remote branch franz
+        \node[branch_remote]  (master_remote2) [above right of=6]  {franz/master};
+        \path[arrow_branch] (6) -- (master_remote2);
+      }
+      
+      \visible<1-2>{
+        % Master
+        \node[branch]  (master) [below right of=6]  {master};
+        \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
+        
+        % Branch arrows
+        \path[arrow_branch] (6) -- (master);
+        \path[arrow_branch] (6) -- (master_remote);
+        
+
+      }
+      
+      % Commits from franz
+      \visible<2>{
+        \node[commit] (7) [above right of=6] {7};
+        \node[commit] (8) [right of=7] {8};
+        \path[arrow_commit] (6) -- (7);
+        \path[arrow_commit] (7) -- (8);
+        
+        \node[branch_remote]  (master_remote2) [above right of=8]  {franz/master};
+        \path[arrow_branch] (8) -- (master_remote2);
+        
+        \node[headline,align=left] (text_fetch) at (2,6) {\texttt{git fetch franz}};
+      }
+      
+      \visible<3>{
+        \node[commit] (7) [right of=6] {7};
+        \node[commit] (8) [right of=7] {8};
+        \path[arrow_commit] (6) -- (7);
+        \path[arrow_commit] (7) -- (8);
+        
+        % Master
+        \node[branch]  (master) [below right of=8]  {master};
+        \node[branch_remote]  (master_remote) [below left of=8]  {origin/master};
+        
+        % Branch arrows
+        \path[arrow_branch] (8) -- (master);
+        \path[arrow_branch] (8) -- (master_remote);
+        
+        % Head
+        \node[head]  (head) [below of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
+        
+        % Remote franz
+        \node[branch_remote]  (master_remote2) [above right of=8]  {franz/master};
+        \path[arrow_branch] (8) -- (master_remote2);
+        
+        % Git command
+        \node[headline] (text_fetch) at (4,6) {\texttt{git merge franz/master}};
       }
 
     \end{tikzpicture}
