@@ -275,7 +275,10 @@
       \node[commit] (1) [right of=0] {1};
       \node[commit] (2) [right of=1] {2};
       \node[commit] (3) [right of=2] {3};
-      \node[branch]  (master) [above of=3]  {master};
+      
+      \visible<1-3>{
+        \node[branch]  (master) [above of=3]  {master};
+      }
 
       % Commit arrows
       \path[arrow_commit]
@@ -286,19 +289,34 @@
       % Arrow branch to last commit
       \path[arrow_branch] (3) edge node [uigray,xshift=-0.3cm,font=\Large]{} (master);
       
-              
+      % Git commit
+      \visible<4->{
+        \node[commit] (4) [right of=3] {4};
+        \path[arrow_commit] (3) -- (4);
+        
+        % Fade out old master
+        \node[branch, opacity=0.2]  (master) [above of=3]  {master};
+        
+        % New master position
+        \node[branch]  (master2) [above of=4]  {master};
+        \path[arrow_branch] (4) -- (master2);
+        
+        % Git command
+        \node[headline] (text_fetch) at (1,3) {\texttt{git commit}};
+      }
+
       % "Name" string and arrow
-      \visible<2->{
+      \visible<2-3>{
         \node[style={font=\sffamily\Huge}] (branch_name) at (3,3) {Name};
         \path[<-,uigray,dotted,thick,shorten <= 6.0pt]
           (master.center) edge [bend right=10] (branch_name.south);
       }
         
       % "Referenz" string and arrow
-      \visible<3->{
-        \node[style={font=\sffamily\Huge}] (branch_ref) at (8,0) {Referenz};
+      \visible<3-3>{
+        \node[style={font=\sffamily\Huge}] (branch_ref) [above right of=4] {Referenz};
         \path[<-,uigray,dotted,thick,shorten <= 8.0pt]
-          (master.south) edge [bend left=10] (branch_ref.north);
+          (3.north) edge [bend right=10] (branch_ref.south);
       }
 
     \end{tikzpicture}
