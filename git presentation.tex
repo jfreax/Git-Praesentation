@@ -59,12 +59,17 @@
 
 % tikz styles
 \tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=28pt]
-\tikzstyle{commit2} = [commit,fill=uired!60,draw=uired]
-\tikzstyle{commit3} = [commit,fill=green1,draw=turquoise]
-\tikzstyle{commit4} = [commit,fill=yellow1,draw=orange1]
-\tikzstyle{branch} = [draw,fill=uipaleblue!60,minimum size=2em]
-\tikzstyle{arrow_commit} = [draw=blue3, fill=blue3,<-,very thick]
-\tikzstyle{arrow_branch} = [draw=blue3, fill=blue3,-,thick,dashed]
+\tikzstyle{commit2} = [commit, fill=uired!60, draw=uired]
+\tikzstyle{commit3} = [commit, fill=green1, draw=turquoise]
+\tikzstyle{commit4} = [commit, fill=yellow1, draw=orange1]
+\tikzstyle{branch} = [draw, rounded corners=5pt, fill=uipaleblue!60, minimum size=2em]
+\tikzstyle{head} = [branch, rounded corners=0pt, fill=yellow1]
+\tikzstyle{empty} = [draw]
+
+\tikzstyle{arrow_commit} =  [<-, draw=blue3, fill=blue3, very thick]
+\tikzstyle{arrow_branch} =  [-,  draw=blue3, fill=blue3, thick, dashed]
+\tikzstyle{arrow_head} =    [-,  draw=blue3, fill=blue3, thick, dashed]
+\tikzstyle{arrow_comment} = [->, draw=uigreen_dark, fill=uigreen_dark, dashed, thick]
 
 % title slide definition
 \title{Git - Eine Einführung}
@@ -346,5 +351,59 @@
   \end{center}
 \end{frame}
 
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\section{Branches}
+\begin{frame}
+  \begin{center}
+    \fontHeadIII{\cred{Welcher Branch?}}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}[c]
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
+      \node[commit] (0)              {0}[anchor=north];
+      \node[commit] (1) [right of=0] {1};
+      \node[commit] (2) [right of=1] {2};
+      \node[commit] (5) [right of=2] {5};
+      \node[commit2] (3) [above of=5] {3};
+      \node[commit3] (4) [below of=2] {4};
+      \node[branch] (featureX) [below of=4] {featureX};
+      \node[branch]  (bugfix) [above of=3]  {bugfix};
+      \node[branch]  (master) [below of=5]  {master};
+      
+      % Commit arrows
+      \path[arrow_commit] (0) -- (1);
+      \path[arrow_commit] (1) -- (2);
+      \path[arrow_commit] (2) -- (5);
+      \path[arrow_commit] (2) -- (3);
+      \path[arrow_commit] (1) -- (4);
+      
+      \path[arrow_branch] (5) -- (master);
+      \path[arrow_branch] (3) -- (bugfix);
+      \path[arrow_branch] (4) -- (featureX);
+      
+      % Refs
+      \visible<2>{
+        \node[empty]  (head1) [right of=master]  {?};
+        \node[empty]  (head2) [right of=bugfix]  {?};
+        \node[empty]  (head3) [right of=featureX]  {?};
+        
+        \path[arrow_comment] (head1) -- (master);
+        \path[arrow_comment] (head2) -- (bugfix);
+        \path[arrow_comment] (head3) -- (featureX);
+      }
+      
+      % Head ref
+      \visible<3->{
+        \node[]  (fake) [right of=master]  {}; % fake node
+        \node[head]  (head) [right of=fake]  {head};
+        \path[arrow_head] (head) -- (master);
+      }
+
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
 
 \end{document}
