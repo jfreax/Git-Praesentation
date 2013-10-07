@@ -501,7 +501,35 @@
       \fontHeadIV{\cgreen{Branches}} & \fontHeadIV{\cgray{bewegen sich}} \\ 
       \fontHeadIV{\cgreen{Tags}} & \fontHeadII{\cred{nicht!}} \\ 
     \end{tabular} 
+  \end{center}
+\end{frame}
 
+
+%-------------------------------------------------------------------
+%                                Remote
+%-------------------------------------------------------------------
+%
+\setbeamercolor{background canvas}{bg=uigreen}
+\section{Remote}
+
+\begin{frame}
+ \begin{center}
+   \fontHeadI{\cdark{Remote}} \\
+   \fontHeadIV{\cgray{Alias einer git-URL}} \\
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}
+  \begin{center}
+    \vspace{-3.5em}
+    \setlength{\tabcolsep}{0pt}
+    \begin{tabular}{r@{}l}
+      \fontHeadIV{\cdark{ssh}} &  \fontNormal{\cgray{ssh://[user@]host.xz[:port]/path/repo.git}} \\ 
+      \fontHeadIV{\cdark{http}} & \fontNormal{\cgray{http[s]://host.xz[:port]/path/to/repo.git}} \\ 
+      \fontHeadIV{\cdark{git}} &  \fontNormal{\cgray{git://host.xz[:port]/path/to/repo.git}} \\ 
+      \fontHeadIV{\cdark{file}} & \fontNormal{\cgray{file:///full/path/to/reponame}} \\ 
+    \end{tabular} 
   \end{center}
 \end{frame}
 
