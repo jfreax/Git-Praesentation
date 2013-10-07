@@ -59,6 +59,7 @@
 
 % tikz styles
 \tikzstyle{empty} = [draw]
+\tikzstyle{headline} = [font=\sffamily\bfseries\Huge]
 
 \tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=28pt]
 \tikzstyle{commit2} = [commit, fill=uired!60, draw=uired]
@@ -345,6 +346,10 @@
         \path[arrow_branch] (6) -- (master);
       }
       
+      \visible<2>{
+        \node[headline] (text_merge) at (0,3) {Merge};
+      }
+      
       % Delete bugfix-Branch
       \visible<3->{
         \node[branch, opacity=0.2]  (bugfix) [above of=3]  {bugfix};
@@ -583,6 +588,12 @@
       % Tag
       \node[tag] (tag1) [above of=1] {v1.0};
       \path[arrow_head] (tag1) -- (1);
+      
+      % Second remote master
+      \visible<2->{
+        \node[branch_remote]  (master_remote2) [above right of=6]  {franz/master};
+        \path[arrow_branch] (6) -- (master_remote2);
+      }
 
     \end{tikzpicture}
   \end{center}
