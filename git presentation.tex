@@ -396,7 +396,7 @@
       \path[arrow_branch] (3) -- (bugfix);
       \path[arrow_branch] (4) -- (featureX);
       
-      % Refs
+      % Refs ?
       \visible<2>{
         \node[empty]  (head1) [right of=master]  {?};
         \node[empty]  (head2) [right of=bugfix]  {?};
@@ -483,12 +483,25 @@
       \path[arrow_branch] (4) -- (featureX);
       
       % Tag
-      \node[tag] (tag1) [above of=1] {v1.0}
-      \path[arrow_head] (tag1) -- (1);
+      \visible<2->{
+        \node[tag] (tag1) [above of=1] {v1.0};
+        \path[arrow_head] (tag1) -- (1);
+      }
 
-
-      
     \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\section{Tags}
+\begin{frame}
+  \begin{center}
+    \setlength{\tabcolsep}{0pt}
+    \begin{tabular}{r@{}l}
+      \fontHeadIV{\cgreen{Branches}} & \fontHeadIV{\cgray{bewegen sich}} \\ 
+      \fontHeadIV{\cgreen{Tags}} & \fontHeadII{\cred{nicht!}} \\ 
+    \end{tabular} 
+
   \end{center}
 \end{frame}
 
