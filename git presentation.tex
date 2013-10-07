@@ -371,7 +371,12 @@
       \node[commit3] (4) [below of=2] {4};
       \node[branch] (featureX) [below of=4] {featureX};
       \node[branch]  (bugfix) [above of=3]  {bugfix};
-      \node[branch]  (master) [below of=5]  {master};
+      
+      % Master branch
+      \visible<1-3>{
+        \node[branch]  (master) [below of=5]  {master};
+        \path[arrow_branch] (5) -- (master);
+      }
       
       % Commit arrows
       \path[arrow_commit] (0) -- (1);
@@ -380,7 +385,6 @@
       \path[arrow_commit] (2) -- (3);
       \path[arrow_commit] (1) -- (4);
       
-      \path[arrow_branch] (5) -- (master);
       \path[arrow_branch] (3) -- (bugfix);
       \path[arrow_branch] (4) -- (featureX);
       
@@ -396,12 +400,31 @@
       }
       
       % Head ref
-      \visible<3->{
-        \node[]  (fake) [right of=master]  {}; % fake node
-        \node[head]  (head) [right of=fake]  {head};
+      \visible<3>{
+        \node[head]  (head) [below of=master]  {HEAD};
         \path[arrow_head] (head) -- (master);
       }
+      
+      % Add commit
+      \visible<4>{
+        % Fade out old master/head
+        \node[head, opacity=0.2]  (head) [below of=master]  {HEAD};
+        \path[arrow_head, opacity=0.2] (head) -- (master);
+        \node[branch, opacity=0.2]  (master) [below of=5]  {master};
+        \path[arrow_branch, opacity=0.2] (5) -- (master);
 
+        
+        % Show new
+        \node[commit] (6) [right of=5] {6};
+        \path[arrow_commit] (5) -- (6);
+        
+        \node[branch]  (master) [below of=6]  {master};
+        \path[arrow_branch] (6) -- (master);
+        
+        \node[head]  (head) [below of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
+      }
+      
     \end{tikzpicture}
   \end{center}
 \end{frame}
