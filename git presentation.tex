@@ -58,13 +58,15 @@
 \include{macros}
 
 % tikz styles
+\tikzstyle{empty} = [draw]
+
 \tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=28pt]
 \tikzstyle{commit2} = [commit, fill=uired!60, draw=uired]
 \tikzstyle{commit3} = [commit, fill=green1, draw=turquoise]
 \tikzstyle{commit4} = [commit, fill=yellow1, draw=orange1]
 \tikzstyle{branch} = [draw, rounded corners=5pt, fill=uipaleblue!60, minimum size=2em]
 \tikzstyle{head} = [branch, rounded corners=0pt, fill=yellow1]
-\tikzstyle{empty} = [draw]
+\tikzstyle{tag} = [head, rounded corners=10pt]
 
 \tikzstyle{arrow_commit} =  [<-, draw=blue3, fill=blue3, very thick]
 \tikzstyle{arrow_branch} =  [-,  draw=blue3, fill=blue3, thick, dashed]
@@ -285,16 +287,16 @@
               
       % "Name" string and arrow
       \visible<2->{
-        \node[style={font=\sffamily\Large}] (branch_name) at (3,4) {Name};
+        \node[style={font=\sffamily\Huge}] (branch_name) at (3,4) {Name};
         \path[<-,uigray,dotted,thick,shorten <= 6.0pt]
           (master.center) edge [bend right=10] (branch_name.south);
       }
         
       % "Referenz" string and arrow
       \visible<3->{
-        \node[style={font=\sffamily\Large}] (branch_ref) at (8,0) {Referenz};
+        \node[style={font=\sffamily\Huge}] (branch_ref) at (8,0) {Referenz};
         \path[<-,uigray,dotted,thick,shorten <= 8.0pt]
-          (master.south) edge [bend left=10] (branch_ref.west);
+          (master.south) edge [bend left=10] (branch_ref.north);
       }
 
     \end{tikzpicture}
@@ -351,6 +353,11 @@
   \end{center}
 \end{frame}
 
+
+%-------------------------------------------------------------------
+%                                 HEAD
+%-------------------------------------------------------------------
+%
 \setbeamercolor{background canvas}{bg=uigreen_dark}
 \section{Branches}
 \begin{frame}
@@ -385,6 +392,7 @@
       \path[arrow_commit] (2) -- (3);
       \path[arrow_commit] (1) -- (4);
       
+      % Branch arrows
       \path[arrow_branch] (3) -- (bugfix);
       \path[arrow_branch] (4) -- (featureX);
       
@@ -424,6 +432,61 @@
         \node[head]  (head) [below of=master]  {HEAD};
         \path[arrow_head] (head) -- (master);
       }
+      
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+
+%-------------------------------------------------------------------
+%                                Tags
+%-------------------------------------------------------------------
+%
+\setbeamercolor{background canvas}{bg=uigreen_dark}
+\section{Tags}
+\begin{frame}
+  \begin{center}
+    \fontHeadIII{\cred{Tags}}
+  \end{center}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=uigreen}
+\begin{frame}[c]
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
+      \node[commit] (0)              {0}[anchor=north];
+      \node[commit] (1) [right of=0] {1};
+      \node[commit] (2) [right of=1] {2};
+      \node[commit] (5) [right of=2] {5};
+      \node[commit2] (3) [above of=5] {3};
+      \node[commit3] (4) [below of=2] {4};
+      \node[commit] (6) [right of=5] {6};
+      \node[branch]  (master) [below of=6]  {master};
+      \node[branch] (featureX) [below of=4] {featureX};
+      \node[branch]  (bugfix) [above of=3]  {bugfix};
+      
+      % Head
+      \node[head]  (head) [below of=master]  {HEAD};
+      \path[arrow_head] (head) -- (master);
+      
+      % Commit arrows
+      \path[arrow_commit] (0) -- (1);
+      \path[arrow_commit] (1) -- (2);
+      \path[arrow_commit] (2) -- (5);
+      \path[arrow_commit] (2) -- (3);
+      \path[arrow_commit] (1) -- (4);
+      \path[arrow_commit] (5) -- (6);
+
+      % Branch arrows
+      \path[arrow_branch] (6) -- (master);
+      \path[arrow_branch] (3) -- (bugfix);
+      \path[arrow_branch] (4) -- (featureX);
+      
+      % Tag
+      \node[tag] (tag1) [above of=1] {v1.0}
+      \path[arrow_head] (tag1) -- (1);
+
+
       
     \end{tikzpicture}
   \end{center}
