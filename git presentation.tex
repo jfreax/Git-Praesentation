@@ -187,54 +187,52 @@
 
 \setbeamercolor{background canvas}{bg=uigreen}
 \begin{frame}[c]
-  \begin{columns}
-    \column{1.0cm}
-
-    \vspace{2.0em}
-    \begin{tikzpicture}[-,> = stealth',node distance=2.0cm, very thick]
-    
-      \node[commit] (0)              {0}[anchor=north];
-      \node[commit] (1) [above of=0] {1};
-      \node[commit] (2) [above of=1] {2};
-      \node[commit] (3) [above of=2] {3};
-
+  \begin{center}
+    \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
+      \node[commit] (0)              {0};
+      \node[commit] (1) [right of=0] {1};
+      \node[commit] (2) [right of=1] {2};
+      \node[commit] (3) [right of=2] {3};
+      
+      % Commit arrows
       \path[arrow_commit]
         \foreach \y [count=\i] in {0,1,2} {
           (\y) edge node {} (\i)
         } ;
-    \end{tikzpicture}
-    
-    \column{4.5cm}
-      \fontHeadIV{
-        \visible<2-4>{
-          \tikz[na] \coordinate (commit);\cgray{Commit} \\
-        }
-        \visible<3-4>{
-           \ \tikz[na] \coordinate (sha); \cgray{SHA1} \\
-        }
+      
+      % Highlight node
+      \visible<2>{
+
+        \node[commit2] (0) [left of=1] {0};
       }
-  \end{columns}
-    
-  % Brace with "Repository"
-  \only<5>{
-  \begin{tikzpicture}[overlay]
-          \draw[decorate,decoration={brace,amplitude=12pt,mirror,raise=30pt},yshift=0pt,color=uigray,ultra thick]
-               (0.south) -- (3.north) node [uigray,midway,xshift=4.5cm] {
+      \visible<2->{
+        % Add text
+        \node[headline] (text_commit) [above of=0] {commit};
+        \path[arrow_comment] (text_commit) -- (0);
+      }
+      
+      % Highlight node
+      \visible<3>{
+        \node[commit, text=uired!60] (3) [right of=2] {3};
+      }
+      \visible<3->{
+        \node[headline] (text_sha) [above of=3] {SHA1};
+        \path[arrow_comment,<-, shorten <= 6pt] (3.center) -- (text_sha);
+      }
+      
+      % Then show x axis
+      \path[->,> = stealth',uigray,thick,transform canvas={yshift=-30pt}]<4->
+        (0.west) edge node [uigray,yshift=-10pt,font=\Large]{t} (3.east);
+        
+      % Big brace
+      \visible<5->{
+        \draw[decorate,decoration={brace,amplitude=12pt,raise=30pt},yshift=0pt,color=uigray,ultra thick]
+               (text_commit.west) -- (text_sha.east) node [uigray,midway,yshift=60pt] {
                  \fontHeadIV{$Repository$}
                };
-  \end{tikzpicture}
-  }
-  
-  % Arrows overlay
-  \begin{tikzpicture}[overlay]
-    \path[<-,> = stealth',uigray,thick,transform canvas={xshift=-20pt}]<4->
-      (3.west) edge node [uigray,xshift=-0.3cm,font=\Large]{t} (0.west);
-    \path[<-,uigray,dashed,thick]<2-4>
-      (2) edge node {} (commit);
-    \path[<-,uigray,dashed,thick,shorten <= 3.8pt]<3-4>
-      (1.center) edge [bend left=10] (sha);
-  \end{tikzpicture}
-
+      }
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 %-------------------------------------------------------------------
