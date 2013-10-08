@@ -640,19 +640,23 @@
       \visible<1-2>{
         % Master
         \node[branch]  (master) [below right of=6]  {master};
-        \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
-        
-        % Branch arrows
         \path[arrow_branch] (6) -- (master);
-        \path[arrow_branch] (6) -- (master_remote);
         
-
+        % Head
+        \node[head]  (head) [below of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
+      }
+      
+      % Remote master
+      \visible<1-3>{
+        \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
+        \path[arrow_branch] (6) -- (master_remote);
       }
       
       % Commits from franz
       \visible<2>{
-        \node[commit] (7) [above right of=6] {7};
-        \node[commit] (8) [right of=7] {8};
+        \node[commit2] (7) [above right of=6] {7};
+        \node[commit2] (8) [right of=7] {8};
         \path[arrow_commit] (6) -- (7);
         \path[arrow_commit] (7) -- (8);
         
@@ -662,19 +666,29 @@
         \node[headline,align=left] (text_fetch) at (2,6) {\texttt{git fetch franz}};
       }
       
+      % Git merge franz/master
       \visible<3>{
-        \node[commit] (7) [right of=6] {7};
-        \node[commit] (8) [right of=7] {8};
+        % Fade out old master
+        \node[branch, opacity=0.2]  (master_old) [below right of=6]  {master};
+        \path[arrow_branch] (6) -- (master_old);
+        
+        % Fade out old ead
+        \node[head, opacity=0.2]  (head_old) [below of=master]  {HEAD};
+        \path[arrow_head] (head_old) -- (master);
+        
+        % Git command
+        \node[headline] (text_fetch) at (4,6) {\texttt{git merge franz/master}};
+      }
+      
+      \visible<3->{
+        \node[commit2] (7) [right of=6] {7};
+        \node[commit2] (8) [right of=7] {8};
         \path[arrow_commit] (6) -- (7);
         \path[arrow_commit] (7) -- (8);
         
         % Master
         \node[branch]  (master) [below right of=8]  {master};
-        \node[branch_remote]  (master_remote) [below left of=8]  {origin/master};
-        
-        % Branch arrows
         \path[arrow_branch] (8) -- (master);
-        \path[arrow_branch] (8) -- (master_remote);
         
         % Head
         \node[head]  (head) [below of=master]  {HEAD};
@@ -683,9 +697,20 @@
         % Remote franz
         \node[branch_remote]  (master_remote2) [above right of=8]  {franz/master};
         \path[arrow_branch] (8) -- (master_remote2);
-        
+      }
+      
+      % git push (move origin master)
+      \visible<4>{
+        % Fade out old remote master
+        \node[branch_remote, opacity=0.2]  (master_remote_old) [below left of=6]  {origin/master};
+        \path[arrow_branch] (6) -- (master_remote_old);
+      
+        % Show new remote master
+        \node[branch_remote]  (master_remote) [below left of=8]  {origin/master};
+        \path[arrow_branch] (8) -- (master_remote);
+
         % Git command
-        \node[headline] (text_fetch) at (4,6) {\texttt{git merge franz/master}};
+        \node[headline] (text_push) at (1,6) {\texttt{git push}};
       }
     \end{tikzpicture}
   \end{center}
