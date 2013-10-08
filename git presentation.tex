@@ -298,9 +298,9 @@
           (master.center) edge [bend right=10] (branch_name.south);
       }
         
-      % "Referenz" string and arrow
+      % "Pointer" string and arrow
       \visible<3-3>{
-        \node[style={font=\sffamily\Huge}] (branch_ref) [above right of=4] {Referenz};
+        \node[style={font=\sffamily\Huge}] (branch_ref) [above right of=4] {Pointer};
         \path[<-,uigray,dotted,thick,shorten <= 8.0pt]
           (3.north) edge [bend right=10] (branch_ref.south);
       }
@@ -572,11 +572,8 @@
       \node[commit] (4) [below of=2] {4};
       \node[commit] (6) [right of=5] {6};
       \node[branch]  (master) [below right of=6]  {master};
-      \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
-      \node[branch_remote] (featureX_remote) [below of=4] {origin/featureX};
       \node[branch] (bugfix) [above right of=3]  {bugfix};
-      \node[branch_remote] (bugfix_remote) [above left of=3]  {origin/bugfix};
-      
+
       % Head
       \node[head]  (head) [below of=master]  {HEAD};
       \path[arrow_head] (head) -- (master);
@@ -591,17 +588,25 @@
 
       % Branch arrows
       \path[arrow_branch] (6) -- (master);
-      \path[arrow_branch] (6) -- (master_remote);
       \path[arrow_branch] (3) -- (bugfix);
-      \path[arrow_branch] (3) -- (bugfix_remote);
-      \path[arrow_branch] (4) -- (featureX_remote);
+ 
+      % Remote branches
+      \visible<2->{
+        \node[branch_remote]  (master_remote) [below left of=6]  {origin/master};
+        \node[branch_remote] (featureX_remote) [below of=4] {origin/featureX};
+        \node[branch_remote] (bugfix_remote) [above left of=3]  {origin/bugfix};
+        
+        \path[arrow_branch] (6) -- (master_remote);
+        \path[arrow_branch] (3) -- (bugfix_remote);
+        \path[arrow_branch] (4) -- (featureX_remote);
+      }
       
       % Tag
       \node[tag] (tag1) [above of=1] {v1.0};
       \path[arrow_head] (tag1) -- (1);
       
       % Second remote master
-      \visible<2->{
+      \visible<3->{
         \node[branch_remote]  (master_remote2) [above right of=6]  {franz/master};
         \path[arrow_branch] (6) -- (master_remote2);
       }
