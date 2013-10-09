@@ -66,7 +66,7 @@
 
 % tikz styles
 \tikzstyle{empty} = [draw]
-\tikzstyle{headline} = [font=\sffamily\bfseries\Huge]
+\tikzstyle{headline} = [font=\sffamily\bfseries\Huge,anchor=west]
 
 \tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt, minimum size=28pt]
 \tikzstyle{commit} = [circle,fill=blue2,draw=blue1,font=\sffamily\small\bfseries,inner sep=0pt,minimum size=28pt]
@@ -295,7 +295,7 @@
         \path[arrow_branch] (4) -- (master2);
 
         % Git command
-        \node[headline] (text_fetch) at (1,3) {\texttt{git commit}};
+        \node[headline] (text_fetch) at (-1,4) {\texttt{git commit}};
       }
 
       % "Name" string and arrow
@@ -367,7 +367,8 @@
       }
       
       \visible<2>{
-        \node[headline] (text_merge) at (0,3) {\texttt{git merge}};
+        % Git merge command
+        \node[headline] (text_merge) at (-2,4) {\texttt{git merge}};
       }
       
       % Delete bugfix-Branch
@@ -375,7 +376,8 @@
         \node[branch, opacity=0.2]  (bugfix) [above of=3]  {bugfix};
         \path[arrow_branch, opacity=0.2] (3) -- (bugfix);
         
-        \node[headline] (text_delete) at (1,3) {\texttt{git branch -d}};
+        % Git delete branch command
+        \node[headline] (text_delete) at (-2,4) {\texttt{git branch -d}};
       }
     \end{tikzpicture}
   \end{center}
@@ -680,7 +682,8 @@
         \node[branch_remote]  (master_remote2) [above right of=8]  {franz/master};
         \path[arrow_branch] (8) -- (master_remote2);
         
-        \node[headline,align=left] (text_fetch) at (2,6) {\texttt{git fetch franz}};
+        % Git fetch command
+        \node[headline] (text_fetch) at (-2,5) {\texttt{git fetch franz}};
       }
       
       % Git merge franz/master
@@ -694,7 +697,7 @@
         \path[arrow_head] (head_old) -- (master);
         
         % Git command
-        \node[headline] (text_fetch) at (4,6) {\texttt{git merge franz/master}};
+        \node[headline] (text_fetch) at (-2,5) {\texttt{git merge franz/master}};
       }
       
       \visible<3->{
@@ -727,7 +730,7 @@
         \path[arrow_branch] (8) -- (master_remote);
 
         % Git command
-        \node[headline] (text_push) at (1,6) {\texttt{git push}};
+        \node[headline] (text_push) at (-2,5) {\texttt{git push}};
       }
     \end{tikzpicture}
   \end{center}
@@ -789,7 +792,7 @@
         \path[arrow_head] (head) -- (master);
         
         % Git commit command
-        \node[headline] (text_commit) at (1,6) {\texttt{git commit}};
+        \node[headline] (text_commit) at (-2,5) {\texttt{git commit}};
       }
       
       % After merge
@@ -809,7 +812,7 @@
         \path[arrow_head] (head) -- (master);
         
         % Git merge command
-        \node[headline] (text_merge) at (1,6) {\texttt{git merge}};
+        \node[headline] (text_merge) at (-2,5) {\texttt{git merge}};
       }
 
       % Commits from franz
@@ -872,6 +875,7 @@
       \path[arrow_commit] (7) -- (8);
       \path[arrow_commit] (8) -- (9);
 
+      % franz/master
       \node[branch_remote]  (master_remote2) [above right of=9]  {franz/master};
       \path[arrow_branch] (9) -- (master_remote2);
       
@@ -881,7 +885,7 @@
       
       \visible<3->{
         % Git cherry pick command
-        \node[headline] (text_cherry) at (3,6) {\texttt{git cherry-pick 8}};
+        \node[headline] (text_cherry) at (-1,6) {\texttt{git cherry-pick 8}};
         
         % New commit
         \node[commit] (8a) [right of=11] {8a};
@@ -953,13 +957,13 @@
       
       \visible<2>{
         % Git fetch command
-        \node[headline,anchor=west] (text_fetch) at (-1,4) {\texttt{git fetch}};
+        \node[headline] (text_fetch) at (-1,4) {\texttt{git fetch}};
       }
       
       % After rebase
       \visible<3->{
         % Git fetch command
-        \node[headline,anchor=west] (text_rebase)  at (-1,4) {\texttt{git rebase origin/master}};
+        \node[headline] (text_rebase)  at (-1,4) {\texttt{git rebase origin/master}};
         
         \node[commit] (9a) [right of=8] {9a};
         \node[commit] (10a) [right of=9a] {10a};
