@@ -923,42 +923,55 @@
     \begin{tikzpicture}[-,> = stealth',node distance=1.8cm, very thick]
       \node[commit, opacity=0.5] (etc) at (0, 0) {...};
       \node[commit] (6) [right of=etc] {6};
-      \node[commit] (7) [right of=6] {7};
-      \node[commit] (8) [right of=7] {8};
       \path[arrow_commit] (etc) -- (6);
-      \path[arrow_commit] (6) -- (7);
-      \path[arrow_commit] (7) -- (8);
       
       \visible<1>{
         % Remote master
-        \node[branch_remote]  (master_remote) [above left of=6]  {origin/master};
+        \node[branch_remote]  (master_remote) [below of=6]  {origin/master};
         \path[arrow_branch] (6) -- (master_remote);
+        
+        \node[commit] (7) [right of=6] {7};
+        \node[commit] (8) [right of=7] {8};
+        \path[arrow_commit] (6) -- (7);
+        \path[arrow_commit] (7) -- (8);
       }
  
       % Master and head
-      \visible<1->{
-        \node[branch]  (master) [below right of=8]  {master};
+      \visible<1>{
+        \node[branch]  (master) [above right of=8]  {master};
         \path[arrow_branch] (8) -- (master);
         
-        \node[head]  (head) [below of=master]  {HEAD};
+        \node[head]  (head) [above of=master]  {HEAD};
         \path[arrow_head] (head) -- (master);
       }
       
-      \visible<2->{
+      \visible<2->{   
         % Commits from remote
-        \node[commit3] (9) [above of=7] {9};
+        \node[commit3] (9) [right of=6] {9};
         \node[commit3] (10) [right of=9] {10};
         \path[arrow_commit] (6) -- (9);
         \path[arrow_commit] (9) -- (10);
+        
+        % Rearrange my commits
+        \node[commit] (7) [above of=9] {7};
+        \node[commit] (8) [right of=7] {8};
+        \path[arrow_commit] (6) -- (7);
+        \path[arrow_commit] (7) -- (8);
 
         % Remote master
-        \node[branch_remote]  (master_remote) [above right of=10]  {origin/master};
+        \node[branch_remote]  (master_remote) [below of=10]  {origin/master};
         \path[arrow_branch] (10) -- (master_remote);
       }
       
       \visible<2>{
         % Git fetch command
         \node[headline] (text_fetch) at (-1,4) {\texttt{git fetch}};
+        
+        % Redraw master / head
+        \node[branch]  (master) [above right of=8]  {master};
+        \path[arrow_branch] (8) -- (master);
+        \node[head]  (head) [right of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
       }
       
       % After rebase
@@ -966,10 +979,20 @@
         % Git fetch command
         \node[headline] (text_rebase)  at (-1,4) {\texttt{git rebase origin/master}};
         
-        \node[commit] (9a) [right of=8] {9a};
-        \node[commit] (10a) [right of=9a] {10a};
-        \path[arrow_commit] (8) -- (9a);
-        \path[arrow_commit] (9a) -- (10a);
+        \node[commit] (7a) [right of=10] {7a};
+        \node[commit] (8a) [right of=7a] {8a};
+        \path[arrow_commit] (10) -- (7a);
+        \path[arrow_commit] (7a) -- (8a);
+        
+        \path[arrow_cherry] (7) -- (7a);
+        \path[arrow_cherry] (8) -- (8a);
+        
+        % New master and head
+        \node[branch]  (master) [below of=8a]  {master};
+        \path[arrow_branch] (8a) -- (master);
+        
+        \node[head]  (head) [below of=master]  {HEAD};
+        \path[arrow_head] (head) -- (master);
       }
       
     \end{tikzpicture}
