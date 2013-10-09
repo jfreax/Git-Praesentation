@@ -82,6 +82,7 @@
 \tikzstyle{arrow_branch} =  [-,  draw=blue3, fill=blue3, thick, dashed]
 \tikzstyle{arrow_head} =    [-,  draw=blue3, fill=blue3, thick, dashed]
 \tikzstyle{arrow_comment} = [->, draw=uigreen_dark, fill=uigreen_dark, dashed, thick]
+\tikzstyle{arrow_cherry} = [arrow_commit,->,uired, dotted]
 
 \tikzstyle{commmit_highlight} = [circle, draw=uired, ultra thick, minimum size=38pt]
 
@@ -890,7 +891,7 @@
         % New commit
         \node[commit] (8a) [right of=11] {8a};
         \path[arrow_commit] (11) -- (8a);
-        \path[arrow_commit,->,uired, dotted] (highlight) -- (8a);
+        \path[arrow_cherry] (highlight) -- (8a);
         
         % New master & head
         \node[branch]  (master) [below right of=8a]  {master};
